@@ -49,6 +49,15 @@ async function getDefaultDescription() {
             + `- **Workflow**: ${context.workflow}\n`
             + `- **Commit SHA**: ${context.sha}\n`
             ;
+    case 'pull_request':
+        return `- **Event:** ${context.eventName}\n`
+            + `- **Repo:** ${payload.repository.full_name}\n`
+            + `- **PR Title:** ${payload.pull_request.title}\n`
+            + `- **PR Number:** #${payload.pull_request.number}\n`
+            + `- **PR Author:** ${payload.pull_request.user.login}\n`
+            + `- **PR State:** ${payload.pull_request.state}\n`
+            + `- **PR URL:** ${payload.pull_request.html_url}\n`
+            + `- **PR Description:** ${payload.pull_request.body || "No description"}\n`;
     default:
         return `- **Event:** ${context.eventName}\n`
             + `- **Repo:** ${payload.repository.full_name}\n`;
